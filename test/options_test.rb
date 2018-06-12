@@ -72,6 +72,14 @@ class OptionsTest < Faraday::TestCase
     assert_nil options.proxy
   end
 
+  # Adds support for custom Hyfn8 options
+  def test_responds_to_custom_options
+    options = Faraday::RequestOptions.new
+    assert_equal options.respond_to?(:etag), true
+    assert_equal options.respond_to?(:ignore_etag), true
+    assert_equal options.respond_to?(:async), true
+  end
+
   def test_proxy_options_from_string
     options = Faraday::ProxyOptions.from 'http://user:pass@example.org'
     assert_equal 'user', options.user
